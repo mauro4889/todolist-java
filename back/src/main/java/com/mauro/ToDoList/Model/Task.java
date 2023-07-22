@@ -11,18 +11,19 @@ public class Task {
     private Long id;
     private String name;
     private String description;
+    @Transient
     private boolean isCompleted = false;
+    @Transient
     private LocalDate dateCreated;
 
     public Task() {
     }
 
-    public Task(Long id, String name, String description, boolean isCompleted, LocalDate dateCreated) {
+    public Task(Long id, String name, String description, boolean isCompleted) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.isCompleted = isCompleted;
-        this.dateCreated = dateCreated;
     }
 
     public Long getId() {
@@ -49,19 +50,19 @@ public class Task {
         this.description = description;
     }
 
+    public LocalDate getDateCreated() {
+        return dateCreated.now();
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
     public boolean isCompleted() {
         return isCompleted;
     }
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
-    }
-
-    public LocalDate getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
     }
 }
