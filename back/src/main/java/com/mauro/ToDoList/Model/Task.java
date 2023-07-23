@@ -11,19 +11,19 @@ public class Task {
     private Long id;
     private String name;
     private String description;
-    @Transient
-    private boolean isCompleted = false;
+    private boolean isCompleted;
     @Transient
     private LocalDate dateCreated;
 
     public Task() {
     }
 
-    public Task(Long id, String name, String description, boolean isCompleted) {
+    public Task(Long id, String name, String description, boolean isCompleted, LocalDate dateCreated) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.isCompleted = isCompleted;
+        this.isCompleted = false;
+        this.dateCreated = dateCreated.now();
     }
 
     public Long getId() {

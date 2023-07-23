@@ -3,30 +3,40 @@ package com.mauro.ToDoList.Service;
 import com.mauro.ToDoList.Model.Task;
 import com.mauro.ToDoList.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
+    HashMap<String, Object> response = new HashMap<>();
 
     @Autowired
     public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
     }
 
+    //Muestra todas las tareas
     public List<Task> getTasks(){
         return this.taskRepository.findAll();
     }
 
-    public String newTask(Task task) {
+    //Crea una tarea nueva
+    public ResponseEntity<Object> newTask(Task task) {
         this.taskRepository.save(task);
-        return "Tarea creada satisfactoriamente";
+        response.put("success", true);
+        response.put("message:", "Tarea creada");
+        return new ResponseEntity<>(
+                HttpStatus.CREATED
+        );
     }
 
+    //Actualiza una tarea y si esta completa o no
     public String updatedTask(long id, Task task) {
         Boolean isExist = this.getTaskById(id);
         Task updatedTask = taskRepository.findById(id).get();
@@ -40,11 +50,21 @@ public class TaskService {
             if(task.isCompleted() != updatedTask.isCompleted()){
                 updatedTask.setCompleted(task.isCompleted());
             }
+            taskRepository.save(updatedTask);
         }
+        return "Tarea actualizada satisfactoriamente";
     }
 
+    //Obtener tarea por id
     public Boolean getTaskById(long id){
         Optional<Task> taskOptional = this.taskRepository.findById(id);
         return taskOptional.isPresent();
+    }
+
+    //Eliminar tarea
+    public String deletedTask(long id) {
+        Task deletedTask = taskRepository.findById(id).get();
+        taskRepository.delete(deletedTask);
+        return "Tarea eliminada";
     }
 }

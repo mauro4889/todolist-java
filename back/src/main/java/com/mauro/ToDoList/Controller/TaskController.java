@@ -3,7 +3,9 @@ package com.mauro.ToDoList.Controller;
 import com.mauro.ToDoList.Model.Task;
 import com.mauro.ToDoList.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -23,12 +25,18 @@ public class TaskController {
     }
 
     @PostMapping
-    public String createTask(@RequestBody Task task){
+    public ResponseEntity<Object> createTask(@RequestBody Task task){
         return this.taskService.newTask(task);
     }
 
-    @PutMapping(value = "/id")
+    @DeleteMapping(value = "/{id}")
+    public String deleteTask(@PathVariable long id){
+        return this.taskService.deletedTask(id);
+    }
+
+    @PutMapping(value = "/{id}")
     public String updateTask(@PathVariable long id, @RequestBody Task task){
         return this.taskService.updatedTask(id, task);
     }
+
 }
