@@ -28,6 +28,7 @@ public class TaskService {
 
     //Crea una tarea nueva
     public ResponseEntity<Object> newTask(Task task) {
+        System.out.println(task);
         this.taskRepository.save(task);
         response.put("success", true);
         response.put("message:", "Tarea creada");
