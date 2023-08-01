@@ -7,7 +7,6 @@ export const NewTask = () => {
 
     const onSubmit = async data => {
         const { name, description } = data
-        console.log(data)
         await newTask(data)
     }
 
