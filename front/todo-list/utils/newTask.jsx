@@ -1,5 +1,4 @@
 import { cache } from 'react'
-import { getData } from './allTask';
 
 export const newTask = cache(async (data) => {
     try {
@@ -10,7 +9,6 @@ export const newTask = cache(async (data) => {
             },
             body: JSON.stringify(data), // Aquí puedes enviar los datos en el cuerpo de la solicitud
         });
-        getData()
     } catch (error) {
         return error
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -24,6 +25,29 @@ public class TaskService {
     //Muestra todas las tareas
     public List<Task> getTasks(){
         return this.taskRepository.findAll();
+    }
+
+    //Muesta las tareas activas
+    public List<Task> getActiveTasks(){
+        //Obtengo todas las tareas
+        List<Task> tasks = this.taskRepository.findAll();
+
+        // Filtrar los objetos con miPropiedadBooleana igual a true
+        List<Task> activeTasks = tasks.stream()
+                .filter(objeto -> !objeto.isCompleted()) // Selecciona solo aquellos objetos con miPropiedadBooleana igual a true
+                .collect(Collectors.toList());
+        return activeTasks;
+    }
+
+    public List<Task> getCompletedTasks(){
+        //Obtengo todas las tareas
+        List<Task> tasks = this.taskRepository.findAll();
+
+        // Filtrar los objetos con miPropiedadBooleana igual a true
+        List<Task> activeTasks = tasks.stream()
+                .filter(objeto -> objeto.isCompleted()) // Selecciona solo aquellos objetos con miPropiedadBooleana igual a true
+                .collect(Collectors.toList());
+        return activeTasks;
     }
 
     //Crea una tarea nueva

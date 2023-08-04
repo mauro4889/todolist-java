@@ -24,6 +24,16 @@ public class TaskController {
         return this.taskService.getTasks();
     }
 
+    @GetMapping("/activetasks")
+    public List<Task> getActiveTasks(){
+        return this.taskService.getActiveTasks();
+    }
+
+    @GetMapping("/completedtasks")
+    public List<Task> getCompletedTasks(){
+        return this.taskService.getCompletedTasks();
+    }
+
     @PostMapping
     public ResponseEntity<Object> createTask(@RequestBody Task task){
         System.out.println(task);
