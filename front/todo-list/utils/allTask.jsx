@@ -20,6 +20,27 @@ export const getActiveTasks = async () =>{
     }
 }
 
+export const completeTask = async (id) => {
+    try {
+        console.log(id)
+        const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ completed: true })
+        });
+
+        if (response.ok) {
+            console.log('Tarea finalizada');
+        } else {
+            console.log('Error al finalizar la tarea');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getCompletedTasks = async () =>{
     try {
         const res = await fetch("http://localhost:8080/api/tasks/completedtasks", { cache: 'no-store' });
@@ -30,18 +51,18 @@ export const getCompletedTasks = async () =>{
     }
 }
 
-export async function deleteTask(id){
-    console.log(id)
+export const deleteTask = async (id) => {
     try {
-        const deleted = await fetch(`http://localhost:8080/api/tasks/${id}`, {
+        const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
             method: 'DELETE'
-        })
-        if (deleted.ok){
-            console.log('Tarea eliminada')
-        } else{
-            console.log('Error al eliminar la tarea')
+        });
+
+        if (response.ok) {
+            return console.log('Tarea eliminada');
+        } else {
+            console.log('Error al eliminar la tarea');
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }

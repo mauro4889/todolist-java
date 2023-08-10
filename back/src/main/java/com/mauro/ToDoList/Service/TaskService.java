@@ -87,6 +87,7 @@ public class TaskService {
 
     //Eliminar tarea
     public String deletedTask(long id) {
+        System.out.println(id);
         Task deletedTask = taskRepository.findById(id).get();
         taskRepository.delete(deletedTask);
         return "Tarea eliminada";
