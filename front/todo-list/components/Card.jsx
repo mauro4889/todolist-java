@@ -18,9 +18,9 @@ export const Card = ({ task }) => {
     }
     return (
         <div className="card text-white bg-primary mb-3">
-            <div className="card-header"> {task.name} </div>
+            <div className="card-header"> <h4>{task.name}</h4> </div>
             <div className="card-body">
-                <h4 className="card-title"> {task.description} </h4>
+                <small className="card-title"> {task.description} </small>
                 <p className="card-text"> {fechaFormateada} </p>
             </div>
             <div className="btn-group btn-group-sm grid column-gap-2 mx-5 mb-1">
