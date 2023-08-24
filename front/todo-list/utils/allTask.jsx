@@ -22,7 +22,6 @@ export const getActiveTasks = async () =>{
 
 export const completeTask = async (id) => {
     try {
-        console.log(id)
         const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
             method: 'PUT',
             headers: {

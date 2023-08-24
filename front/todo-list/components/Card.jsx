@@ -13,8 +13,8 @@ export const Card = ({ task }) => {
     }
 
     const finishTask = async () => {
-        console.log('tarea')
         completeTask(id)
+        window.location.reload();
     }
     return (
         <div className="card text-white bg-primary mb-3">
@@ -31,7 +31,6 @@ export const Card = ({ task }) => {
         .card {
             max-width: 20rem;}
       `}</style>
-
         </div>
     )
 }
